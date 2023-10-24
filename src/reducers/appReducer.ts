@@ -2,7 +2,7 @@ import {persistReducer} from 'redux-persist';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import {buildSliceConfig, getKey, initialPersistState, migrateInit} from '../lib/persist';
-import {resetAction} from './common';
+import {appError, resetAction} from './common';
 import {PersistPartial} from 'redux-persist/lib/persistReducer';
 
 /**
@@ -37,28 +37,29 @@ const slice = createSlice({
 		appLogout: (state) => {
 			state.isLoggedIn = false;
 		},
-		appError: (state, action: PayloadAction<unknown>) => {
-			if (!action.payload) {
-				state.error = undefined;
-				return;
-			}
-			if (typeof action.payload === 'string') {
-				state.error = action.payload;
-				return;
-			}
-			if (typeof action.payload === 'object' && action.payload instanceof Error) {
-				state.error = action.payload.message;
-				return;
-			}
-			state.error = `${action.payload}`;
-		},
 	},
 	extraReducers: (builder) => {
-		builder.addCase(resetAction, () => initialState);
+		builder
+			.addCase(resetAction, () => initialState)
+			.addCase(appError, (state, action) => {
+				if (!action.payload) {
+					state.error = undefined;
+					return;
+				}
+				if (typeof action.payload === 'string') {
+					state.error = action.payload;
+					return;
+				}
+				if (typeof action.payload === 'object' && action.payload instanceof Error) {
+					state.error = action.payload.message;
+					return;
+				}
+				state.error = `${action.payload}`;
+			});
 	},
 });
 
-export const {appLoading, appLogin, appError, appLogout} = slice.actions; // export actions
+export const {appLoading, appLogin, appLogout} = slice.actions; // export actions
 
 export const reducerConfig = buildSliceConfig(
 	slice,

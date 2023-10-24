@@ -8,4 +8,4 @@ client.onLoading((isLoading) => {
 	store.dispatch(appLoading(isLoading));
 });
 
-export const httpFetch = client.fetch;
+export const httpFetch = client.fetch as typeof fetch;

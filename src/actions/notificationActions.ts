@@ -1,6 +1,6 @@
 import {PUBLIC_VAPID_KEY} from '../env';
 import {ThunkResult} from '../reducers';
-import {appError} from '../reducers/appReducer';
+import {appError} from '../reducers/common';
 
 const sendSubscription =
 	(_subscription: PushSubscription): ThunkResult<Promise<void>> =>
@@ -25,10 +25,6 @@ export const doNotificationSubscribe = (): ThunkResult<Promise<void>> => async (
 				throw new Error('no push notification VAPID provided');
 			}
 			const registration = await navigator.serviceWorker.ready;
-			if (!registration.pushManager) {
-				// Push manager unavailable.
-				return;
-			}
 			const existedSubscription = await registration.pushManager.getSubscription();
 			if (existedSubscription === null) {
 				// No push API subscription detected, make a request.

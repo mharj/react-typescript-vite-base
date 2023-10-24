@@ -1,5 +1,6 @@
 import {ThunkResult} from '../reducers';
-import {appError, appLogin} from '../reducers/appReducer';
+import {appLogin} from '../reducers/appReducer';
+import {appError} from '../reducers/common';
 
 export const doLogin =
 	(username: string, password: string): ThunkResult<Promise<void>> =>

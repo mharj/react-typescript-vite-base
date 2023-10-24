@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import {getKey} from './lib/persist';
 import {initialState, ReduxState, rootReducer} from './reducers';
+import {appError} from './reducers/common';
 
 const persistConfig: PersistConfig<ReduxState> = {
 	key: getKey('root'),
@@ -17,7 +18,7 @@ export const store = configureStore({
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			serializableCheck: {
-				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, appError.type],
 			},
 		}).concat(thunk),
 	preloadedState: initialState,

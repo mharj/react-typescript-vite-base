@@ -1,13 +1,13 @@
 import {useState} from 'react';
 import {Helmet} from 'react-helmet-async';
-import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router';
 import {doLogin, doLogout} from '../actions/appActions';
 import {useSelector, useThunkDispatch} from '../reducers';
+import {useI18NFormat} from '../hooks/useI18NFormat';
 
 const LoginView = () => {
 	const nav = useNavigate();
-	const {t} = useTranslation();
+	const f = useI18NFormat('capitalize');
 	const dispatch = useThunkDispatch();
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -19,11 +19,11 @@ const LoginView = () => {
 	return (
 		<div>
 			<Helmet>
-				<title>{t('login')}</title>
+				<title>{f('login')}</title>
 			</Helmet>
 			{isLoggedIn ? (
 				<div>
-					<button onClick={() => dispatch(doLogout())}>{t('logout')}</button>
+					<button onClick={() => dispatch(doLogout())}>{f('logout')}</button>
 				</div>
 			) : (
 				<div>
@@ -42,17 +42,17 @@ const LoginView = () => {
 							name="password"
 							type="password"
 							autoComplete="current-password"
-							onKeyUp={(ev) => {
+							onKeyUp={async (ev) => {
 								ev.preventDefault();
 								if (ev.key === 'Enter') {
-									handleLogin();
+									await handleLogin();
 								}
 							}}
 							onChange={({currentTarget}) => setPassword(currentTarget.value || '')}
 							value={password}
 						/>{' '}
 						<br />
-						<button onClick={() => handleLogin()}>{t('login')}</button>
+						<button onClick={() => handleLogin()}>{f('login')}</button>
 					</form>
 				</div>
 			)}

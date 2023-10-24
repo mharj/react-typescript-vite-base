@@ -1,12 +1,12 @@
 import React from 'react';
 import {Helmet} from 'react-helmet-async';
-import {useTranslation} from 'react-i18next';
 import {IErrorProps} from '../components/ErrorBoundary';
 import {useThunkDispatch} from '../reducers';
 import {resetAction} from '../reducers/common';
+import {useI18NFormat} from '../hooks/useI18NFormat';
 
 const ErrorView: React.FC<IErrorProps> = ({onClear, error}) => {
-	const {t} = useTranslation();
+	const f = useI18NFormat();
 	const dispatch = useThunkDispatch();
 	const handleReset = () => {
 		onClear(); // clear error
@@ -18,9 +18,9 @@ const ErrorView: React.FC<IErrorProps> = ({onClear, error}) => {
 				<title>Error</title>
 			</Helmet>
 			<div className="App-intro">
-				<h1 style={{color: 'red'}}>{t('fatal_error')}</h1>
+				<h1 style={{color: 'red'}}>{f('fatal_error', 'capitalize')}</h1>
 				<h2>{error ? error.message : null}</h2>
-				<button onClick={handleReset}>{t('reset')}</button>
+				<button onClick={handleReset}>{f('reset', 'capitalize')}</button>
 			</div>
 		</div>
 	);

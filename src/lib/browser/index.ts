@@ -3,7 +3,7 @@
  * @returns
  */
 export function isOnline(): boolean {
-	if (typeof window !== 'undefined' && window.navigator) {
+	if (typeof window !== 'undefined') {
 		return window.navigator.onLine;
 	}
 	return true;
