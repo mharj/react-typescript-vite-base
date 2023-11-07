@@ -6,6 +6,8 @@ import {getKey} from './lib/persist';
 import {initialState, ReduxState, rootReducer} from './reducers';
 import {appError} from './reducers/common';
 
+const ignoredActions = [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, appError.type];
+
 const persistConfig: PersistConfig<ReduxState> = {
 	key: getKey('root'),
 	storage,
@@ -17,9 +19,8 @@ export const store = configureStore({
 	reducer: persistedReducer,
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
-			serializableCheck: {
-				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, appError.type],
-			},
+			serializableCheck: process.env.NODE_ENV === 'development' ? {ignoredActions} : false,
+			immutableCheck: process.env.NODE_ENV === 'development',
 		}).concat(thunk),
 	preloadedState: initialState,
 	devTools: process.env.NODE_ENV === 'development',

@@ -4,13 +4,16 @@ import {IErrorProps} from '../components/ErrorBoundary';
 import {useThunkDispatch} from '../reducers';
 import {resetAction} from '../reducers/common';
 import {useI18NFormat} from '../hooks/useI18NFormat';
+import {useNavigate} from 'react-router';
 
 const ErrorView: React.FC<IErrorProps> = ({onClear, error}) => {
+	const nav = useNavigate();
 	const f = useI18NFormat();
 	const dispatch = useThunkDispatch();
 	const handleReset = () => {
-		onClear(); // clear error
+		onClear(); // clear error state
 		dispatch(resetAction()); // reset redux
+		nav('/'); // navigate to home
 	};
 	return (
 		<div>
