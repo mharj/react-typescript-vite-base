@@ -35,15 +35,9 @@ function App() {
 							<img src={reactLogo} className="App-logo" alt="logo" />
 							<h1 className="App-title">Welcome to React</h1>
 						</header>
-						<button value="fi-FI" onClick={({currentTarget}) => changeLanguage(currentTarget.value)}>
-							{f('fin', 'capitalize')}
-						</button>
-						<button value="en-EN" onClick={({currentTarget}) => changeLanguage(currentTarget.value)}>
-							{f('eng', 'capitalize')}
-						</button>
-						<button value="sv-SV" onClick={({currentTarget}) => changeLanguage(currentTarget.value)}>
-							{f('sve', 'capitalize')}
-						</button>
+						<button onClick={() => changeLanguage('fi')}>{f('fin', 'capitalize')}</button>
+						<button onClick={() => changeLanguage('en')}>{f('eng', 'capitalize')}</button>
+						<button onClick={() => changeLanguage('sv')}>{f('sve', 'capitalize')}</button>
 						<br />
 						{isLoading ? 'Fetching API data ..' : ''}
 						<br />
