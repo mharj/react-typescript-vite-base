@@ -1,6 +1,6 @@
 import React, {Suspense} from 'react';
 import {Route, Routes} from 'react-router';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {HashRouter as Router, Link} from 'react-router-dom';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import {useServiceWorker} from './lib/serviceWorker/useServiceWorker';
