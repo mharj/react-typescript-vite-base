@@ -1,17 +1,17 @@
 import {persistReducer} from 'redux-persist';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
-import {buildSliceConfig, getKey, initialPersistState, migrateInit} from '../lib/persist';
+import {buildSliceConfig, getKey, migrateInit} from '../lib/persist';
 import {appError, resetAction} from './common';
-import {PersistPartial} from 'redux-persist/lib/persistReducer';
 
 /**
  * Redux state interface
  */
-interface IState extends PersistPartial {
+interface IState {
 	error: string | undefined;
 	isLoading: boolean;
 	isLoggedIn: boolean;
+	_persist: any;
 }
 
 /**
@@ -21,7 +21,7 @@ const initialState: IState = {
 	error: undefined,
 	isLoading: false,
 	isLoggedIn: false,
-	_persist: initialPersistState,
+	_persist: undefined,
 };
 
 const slice = createSlice({

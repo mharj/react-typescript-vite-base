@@ -1,16 +1,16 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import {buildSliceConfig, getKey, initialPersistState, migrateInit} from '../lib/persist';
+import {buildSliceConfig, getKey, migrateInit} from '../lib/persist';
 import {resetAction} from './common';
-import {PersistPartial} from 'redux-persist/lib/persistReducer';
 import {ToDo} from '../types/ToDo';
 
 /**
  * Redux state interface
  */
-interface IState extends PersistPartial {
+interface IState {
 	todo: ToDo | undefined;
+	_persist: any;
 }
 
 /**
@@ -18,7 +18,7 @@ interface IState extends PersistPartial {
  */
 const initialState: IState = {
 	todo: undefined,
-	_persist: initialPersistState,
+	_persist: undefined,
 };
 
 const slice = createSlice({
