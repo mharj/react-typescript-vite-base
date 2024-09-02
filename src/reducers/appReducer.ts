@@ -11,6 +11,7 @@ interface IState {
 	error: string | undefined;
 	isLoading: boolean;
 	isLoggedIn: boolean;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	_persist: any;
 }
 

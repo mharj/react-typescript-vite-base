@@ -10,6 +10,7 @@ import {ToDo} from '../types/ToDo';
  */
 interface IState {
 	todo: ToDo | undefined;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	_persist: any;
 }
 

@@ -1,6 +1,6 @@
 import {Slice, SliceCaseReducers} from '@reduxjs/toolkit';
 import {Action, Reducer} from 'redux';
-import {PersistedState, PersistMigrate, PersistState} from 'redux-persist';
+import {PersistedState, PersistMigrate} from 'redux-persist';
 
 export function getKey(key: string): string {
 	return 'dev_' + key;
