@@ -1,15 +1,10 @@
-import * as chai from 'chai';
-import 'mocha';
-import chaiAsPromised from 'chai-as-promised';
+import {describe, it} from 'vitest';
 import {store} from '../configureStore';
 import {getTodo} from './demoActions';
 import {toDoSchema} from '../types/ToDo';
 
 const dispatch = store.dispatch;
 const getState = store.getState;
-
-chai.use(chaiAsPromised);
-// const expect = chai.expect;
 
 describe('Demo Actions', function () {
 	it('should get todo', async function () {

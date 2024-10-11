@@ -1,14 +1,9 @@
-import * as chai from 'chai';
-import 'mocha';
-import chaiAsPromised from 'chai-as-promised';
+import {describe, expect, it} from 'vitest';
 import {store} from '../configureStore';
 import {doLogin} from './appActions';
 
 const dispatch = store.dispatch;
 const getState = store.getState;
-
-chai.use(chaiAsPromised);
-const expect = chai.expect;
 
 describe('App Actions', function () {
 	it('should login', async function () {
